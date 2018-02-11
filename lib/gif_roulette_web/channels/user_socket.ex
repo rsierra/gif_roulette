@@ -2,7 +2,7 @@ defmodule GifRouletteWeb.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "room:*", GifRouletteWeb.RoomChannel
+  channel "roulette:*", GifRouletteWeb.RouletteChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
