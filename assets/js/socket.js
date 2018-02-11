@@ -6,7 +6,7 @@
 import {Socket} from "phoenix"
 
 let socket = new Socket("/socket", {
-  params: {token: window.userToken},
+  params: {token: Math.random().toString(36).substr(2)},
   logger: (kind, msg, data) => { console.log(`${kind}: ${msg}`, data) }
 })
 

@@ -19,9 +19,17 @@ defmodule GifRouletteWeb.UserSocket do
   #
   # See `Phoenix.Token` documentation for examples in
   # performing token verification on connect.
-  def connect(_params, socket) do
-    {:ok, socket}
+  def connect(%{"token" => token}, socket) do
+    case get_user_id_by_token(token) do
+      {:ok, user_id} ->
+        {:ok, assign(socket, :user_id, user_id)}
+      {:error, _} ->
+        :error
+    end
   end
+
+  # This function should find the user for this token and return the id
+  defp get_user_id_by_token(token), do: {:ok, token}
 
   # Socket id's are topics that allow you to identify all sockets for a given user:
   #
