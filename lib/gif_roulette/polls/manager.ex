@@ -4,6 +4,8 @@ defmodule GifRoulette.Polls.Manager do
 
   use GenServer
 
+  alias GifRoulette.Polls.Store
+  alias GifRoulette.Polls.State
   alias GifRouletteWeb.Endpoint
 
   # CLIENT
@@ -22,6 +24,7 @@ defmodule GifRoulette.Polls.Manager do
   # SERVER
 
   def init(state) do
+    Store.start_link()
     schedule_work() # Schedule work to be performed at some point
     {:ok, state}
   end
@@ -29,17 +32,20 @@ defmodule GifRoulette.Polls.Manager do
   def handle_info(:work, state) do
     schedule_work() # Reschedule once more
     # Reset the pool time and broadcast poll state to clients
-    Endpoint.broadcast("roulette:lobby", "sync", %{time: @duration})
+    poll_state = State.new(Store.state(), @duration)
+    Endpoint.broadcast("roulette:lobby", "sync", poll_state)
     # Update the start_at state for the new iteration
     {:noreply, %{state | start_at: :os.system_time(:second)}}
   end
 
   defp schedule_work() do
+    Store.init()
     Process.send_after(self(), :work, @duration * 1000)
   end
 
   def handle_call(:state, _from, state) do
-    {:reply, %{time: time_left(state)}, state}
+    poll_state = State.new(Store.state(), time_left(state))
+    {:reply, poll_state, state}
   end
 
   defp time_left(%{start_at: start_at}) do

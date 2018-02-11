@@ -31,6 +31,18 @@ let Roulette = {
   },
   renderPoll(state) {
     counter.init(state.time)
+    let options = document.querySelector("#options")
+    options.innerHTML = ""
+    for (var option in state.poll) {
+      options.innerHTML += Roulette.rederOption(option, state.poll[option])
+    }
+  },
+  rederOption(option, count) {
+    return `
+    <div class="column">
+      <a class="button is-info option" data-value="${option}">${option} (${count})</a>
+    </div>
+    `
   },
 }
 

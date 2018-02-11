@@ -9,5 +9,8 @@
         <%= gettext("Time left") %>: <span id="time-left"></span>
       </div>
     </div>
+
+    <div id="options" class="columns is-mobile has-text-centered">
+    </div>
   </div>
 </section>
