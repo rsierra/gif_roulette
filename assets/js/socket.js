@@ -4,7 +4,6 @@
 // To use Phoenix channels, the first step is to import Socket
 // and connect at the socket path in "lib/web/endpoint.ex":
 import {Socket} from "phoenix"
-import {Presence} from "phoenix"
 
 let socket = new Socket("/socket", {
   params: {token: Math.random().toString(36).substr(2)},
@@ -56,23 +55,5 @@ let socket = new Socket("/socket", {
 // from connect if you don't care about authentication.
 
 socket.connect()
-
-// Now that you are connected, you can join channels with a topic:
-let channel = socket.channel("roulette:lobby", {})
-channel.join()
-  .receive("ok", resp => { console.log("Joined successfully", resp) })
-  .receive("error", resp => { console.log("Unable to join", resp) })
-
-let presences = {}
-
-channel.on("presence_state", state => {
-  presences = Presence.syncState(presences, state);
-  document.querySelector("#users-count").innerText = Object.keys(presences).length;
-})
-
-channel.on("presence_diff", diff => {
-  presences = Presence.syncDiff(presences, diff)
-  document.querySelector("#users-count").innerText = Object.keys(presences).length;
-})
 
 export default socket
