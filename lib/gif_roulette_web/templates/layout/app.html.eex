@@ -7,29 +7,43 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Hello GifRoulette!</title>
+    <title>Gif Roulette</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
   <body>
-    <div class="container">
-      <header class="header">
-        <nav role="navigation">
-          <ul class="nav nav-pills pull-right">
-            <li><a href="http://www.phoenixframework.org/docs">Get Started</a></li>
-          </ul>
+    <section class="hero is-info is-smal is-bold">
+      <div class="hero-head">
+        <nav class="navbar">
+          <div class="container">
+            <div class="navbar-brand">
+              <%= link("Gif Roulette", to: page_path(@conn, :index), class: "navbar-item") %>
+            </div>
+          </div>
         </nav>
-        <span class="logo"></span>
-      </header>
+      </div>
+    </section>
 
+    <section class="alerts">
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+    </section>
 
-      <main role="main">
-        <%= render @view_module, @view_template, assigns %>
-      </main>
+    <%= render @view_module, @view_template, assigns %>
 
-    </div> <!-- /container -->
+    <footer class="footer">
+      <div class="container">
+        <div class="content has-text-centered">
+          <p>
+            <span><%= gettext("Powered by")%></span></br>
+            <%= link to: "http://phoenixframework.org/", class: "navbar-item" do %>
+              <%= img_tag("https://files.readme.io/PKPqx8L9TJSAY2Bnmw7F_phoenixframework-logo-white@2x.png", class: "logo center") %>
+            <% end %>
+          </p>
+        </div>
+      </div>
+    </footer>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>

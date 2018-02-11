@@ -20,7 +20,10 @@ exports.config = {
       // }
     },
     stylesheets: {
-      joinTo: "css/app.css"
+      joinTo: "css/app.css",
+      order: {
+        after: ["static/css/app.css"] // concat app.css last
+      }
     },
     templates: {
       joinTo: "js/app.js"
@@ -47,6 +50,12 @@ exports.config = {
     babel: {
       // Do not use ES6 compiler in vendor code
       ignore: [/vendor/]
+    },
+    sass: {
+      options: {
+        includePaths: ["node_modules/bulma/sass"], // Tell sass-brunch where to look for files to @import
+        precision: 8 // Minimum precision required by bootstrap-sass
+      }
     }
   },
 

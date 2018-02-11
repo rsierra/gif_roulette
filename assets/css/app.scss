@@ -1,0 +1,11 @@
+/* This file is for your main application css. */
+
+@import "node_modules/bulma/bulma";
+
+.footer {
+  background-color: $black;
+  padding: 1rem 1.5rem 1rem;
+  a {
+    display: inline;
+  }
+}
