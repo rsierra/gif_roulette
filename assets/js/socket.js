@@ -67,12 +67,12 @@ let presences = {}
 
 channel.on("presence_state", state => {
   presences = Presence.syncState(presences, state);
-  console.log("Users", Object.keys(presences).length);
+  document.querySelector("#users-count").innerText = Object.keys(presences).length;
 })
 
 channel.on("presence_diff", diff => {
   presences = Presence.syncDiff(presences, diff)
-  console.log("Users", Object.keys(presences).length);
+  document.querySelector("#users-count").innerText = Object.keys(presences).length;
 })
 
 export default socket

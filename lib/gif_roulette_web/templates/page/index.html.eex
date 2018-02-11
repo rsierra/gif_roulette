@@ -1,5 +1,9 @@
 <section class="section">
   <div class="container">
-
+    <div class="columns is-mobile box info">
+      <div class="column">
+        <%= gettext("Users") %>: <span id="users-count">0</span>
+      </div>
+    </div>
   </div>
 </section>
