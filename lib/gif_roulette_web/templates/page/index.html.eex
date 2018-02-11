@@ -1,8 +1,12 @@
 <section class="section">
   <div class="container">
-    <div class="columns is-mobile box info">
+    <div class="columns is-mobile box info has-text-centered">
       <div class="column">
         <%= gettext("Users") %>: <span id="users-count">0</span>
+      </div>
+
+      <div class="column">
+        <%= gettext("Time left") %>: <span id="time-left"></span>
       </div>
     </div>
   </div>

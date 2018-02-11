@@ -10,9 +10,10 @@ defmodule GifRoulette.Application do
     children = [
       # Start the endpoint when the application starts
       supervisor(GifRouletteWeb.Endpoint, []),
+      supervisor(GifRouletteWeb.Presence, []),
       # Start your own worker by calling: GifRoulette.Worker.start_link(arg1, arg2, arg3)
       # worker(GifRoulette.Worker, [arg1, arg2, arg3]),
-      supervisor(GifRouletteWeb.Presence, []),
+      worker(GifRoulette.Polls.Manager, []),
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
