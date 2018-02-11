@@ -9,11 +9,6 @@ let Roulette = {
     channel.onError(e => console.log("Something went wrong", e))
     channel.onClose(e => console.log("Channel closed", e))
 
-    channel.on("new:publication", publication => {
-      publications.append(renderPublication(publication))
-      publications[0].scrollTop = publications[0].scrollHeight;
-    })
-
     let presences = {}
 
     channel.on("presence_state", state => {
