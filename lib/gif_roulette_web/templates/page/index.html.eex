@@ -12,5 +12,9 @@
 
     <div id="options" class="columns is-mobile has-text-centered">
     </div>
+
+    <div id="result" class="box is-mobile has-text-centered">
+      <span id="winner" class="tag is-success is-medium"></span>
+    </div>
   </div>
 </section>

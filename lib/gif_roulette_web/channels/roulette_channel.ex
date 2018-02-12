@@ -22,6 +22,12 @@ defmodule GifRouletteWeb.RouletteChannel do
     {:noreply, socket}
   end
 
+  def handle_in("vote", %{"vote" => value}, socket) do
+    Manager.vote(value)
+    broadcast socket, "sync", Manager.state()
+    {:noreply, socket}
+  end
+
   # Add authorization logic here as required.
   defp authorized?(_payload) do
     true

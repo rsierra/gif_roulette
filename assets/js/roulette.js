@@ -28,6 +28,9 @@ let Roulette = {
     Roulette.channel.on("sync", state => {
       Roulette.renderPoll(state)
     })
+    Roulette.channel.on("result", result => {
+      Roulette.renderResult(result)
+    })
   },
   renderPoll(state) {
     counter.init(state.time)
@@ -36,6 +39,15 @@ let Roulette = {
     for (var option in state.poll) {
       options.innerHTML += Roulette.rederOption(option, state.poll[option])
     }
+
+    let buttons = document.getElementsByClassName('option');
+    for(var i = 0; i < buttons.length; i++) {
+      (function(i) {
+        buttons[i].addEventListener('click', function() {
+          Roulette.channel.push("vote", {vote: this.dataset.value})
+        }, false);
+      })(i);
+    }
   },
   rederOption(option, count) {
     return `
@@ -43,6 +55,10 @@ let Roulette = {
       <a class="button is-info option" data-value="${option}">${option} (${count})</a>
     </div>
     `
+  },
+  renderResult(result) {
+    let winner = document.querySelector("#result #winner")
+    winner.innerText = result.winner + " WINS!"
   },
 }
 
