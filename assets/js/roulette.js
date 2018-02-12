@@ -59,6 +59,8 @@ let Roulette = {
   renderResult(result) {
     let winner = document.querySelector("#result #winner")
     winner.innerText = result.winner + " WINS!"
+    let img = document.querySelector("#result img")
+    img.src = result.url
   },
 }
 
