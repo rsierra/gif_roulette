@@ -1,6 +1,6 @@
 defmodule GifRoulette.Polls.Store do
   @name __MODULE__
-  @options ~w(cats sad funny wtf cute meh cry dance)
+  @options ~w(cats sad funny wtf cute meh cry dance fail win)
 
   def start_link do
     Agent.start_link(fn -> %{} end, name: @name)
